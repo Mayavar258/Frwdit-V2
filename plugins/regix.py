@@ -19,7 +19,7 @@ lock = asyncio.Lock()
 async def pub_(bot, message):
     global files_count, IS_CANCELLED
     await message.answer()
-    await message.message.delete()
+    await message.delete()
     from plugins.public import FROM, TO, SKIP, LIMIT
     if lock.locked():
         await message.message.reply_text('__Previous process running 🥺..__', parse_mode="md")
@@ -49,7 +49,7 @@ async def pub_(bot, message):
                             from_chat_id=FROM,
                             parse_mode="md",       
                             caption=Translation.CAPTION.format(file_name),
-                            message_id=message.message_id
+                            message_id=message.id
                         )
                         total_files += 1
                         await asyncio.sleep(1)
@@ -60,7 +60,7 @@ async def pub_(bot, message):
                             from_chat_id=FROM,
                             parse_mode="md",       
                             caption=Translation.CAPTION.format(file_name),
-                            message_id=message.message_id
+                            message_id=message.id
                         )
                         total_files += 1
                         await asyncio.sleep(1)
